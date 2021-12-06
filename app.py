@@ -11,7 +11,8 @@ from plotly.offline import iplot
 import json
 import streamlit as st
 nltk.download('stopwords')
-
+import os
+os.chdir('C:\\Users\yunxinliu\Documents\GitHub\Similar-Hotel-Recommender-System')
 
 # GLOBAL VAIRABLES THAT WILL BE USED IN TEXT CLEAN FUNCTION & MODEL BUILD
 stop_words = ""
@@ -93,7 +94,7 @@ def load_model():
     sub_replace = re.compile('[^0-9a-z #+_]')
     stop_words = set(stopwords.words('english'))
     print("Loading Data")
-    df = pd.read_csv(r'C:\Users\yunxinliu\Documents\GitHub\clean_data.csv')
+    df = pd.read_csv('clean_data.csv')
     print(df.head())
     tempdf = df[['name', 'city']]
     for index, row in tempdf.iterrows():
