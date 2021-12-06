@@ -147,7 +147,7 @@ if __name__ == '__main__':
     # LOAD MODEL
     cosine_similarity, indices, df, seattleHotels= load_model()
     ##############################Streamlit Appp###################################
-    st.title("New York & Seattle Similar Hotel Recommender App")
+    st.title("Seattle & New York Similar Hotel Recommender App")
     st.subheader('Overview')
     st.markdown("Author: Yunxin Liu")
     st.markdown("A hotel recommendation system that will make use of cosine similarity to output similar recommendations in New York based on selected features from a Seattle's hotel.")
@@ -158,9 +158,8 @@ if __name__ == '__main__':
 
     with st.sidebar.form(key="Form1"):
         with st.sidebar:
-            st.sidebar.markdown("Enter a hotel name that you enjoyed your stay in Seattle. This app will fetch 10 similar hotels in New York for you")
+            st.sidebar.markdown("Enter a hotel name from **_Seattle_** that you enjoyed your stay, and hit the search button. This app will fetch up to 10 similar ones in **_New York_** for you")
             # Host_Country = st.selectbox('Select HomeTeamName name:',('France', 'Spain', 'Italy', 'England', 'Belgium', 'Portugal','Sweden'))
-
             user_input=st.sidebar.selectbox('',tuple(seattleHotels))
             hotelName = str(user_input)
             st.sidebar.text("")
@@ -184,11 +183,11 @@ if __name__ == '__main__':
                 hotel_classes.append(1) 
             st.sidebar.text("")
             st.sidebar.text("")
-            st.sidebar.markdown('**_Optional_**: Preferred range of cleanliness (Select a range)')
+            st.sidebar.markdown('**_Optional_**: Preferred range of cleanliness (Select a range; Otherwise the default will be from 1 through 5)')
             clean=st.sidebar.slider("Cleanliness level",value=(1,1),max_value=5)
             st.sidebar.text("")
             st.sidebar.text("")
-            st.sidebar.markdown('**_Optional_**: Preferred range of sleep comfort level (Select a range)')
+            st.sidebar.markdown('**_Optional_**: Preferred range of sleep comfort level (Select a range; Otherwise the default will be from 1 through 5)')
             sleep=st.sidebar.slider("Sleep quality",value=(1,1),max_value=5)
             st.sidebar.text("")
             st.sidebar.text("")       
