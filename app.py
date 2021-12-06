@@ -62,7 +62,7 @@ stop_words = ""
 sub_replace = None
 
 #########################################################################
-
+@st.cache
 def dataInfo(df):
     # HOTEL DESCRIPTION TOTAL WORDS
     vec = CountVectorizer().fit(df['desc'])
@@ -81,6 +81,7 @@ def dataInfo(df):
     print(words_freq)
 
 # TOP FREQUNCY WORDS
+@st.cache
 def get_top_n_words(corpus,n=None):
     vec = CountVectorizer(stop_words='english',ngram_range=(1,3)).fit(corpus)
     bag_of_words = vec.transform(corpus)
@@ -88,13 +89,14 @@ def get_top_n_words(corpus,n=None):
     words_freq = [(word,sum_words[0,idx]) for word,idx in vec.vocabulary_.items()]
     words_freq = sorted(words_freq,key=lambda x:x[1],reverse=True)
     return words_freq[:n]
-
+@st.cache
 def clean_txt(text):
     text.lower()
     text = sub_replace.sub('',text)
     ' '.join(word for word in text.split() if word not in stop_words)
     return text
 
+@st.cache
 def recommendations(name,cosine_similarity, indices, df):
     recommended_hotels = []
     idx = indices[indices == name].index[0]
@@ -118,6 +120,7 @@ def recommendations(name,cosine_similarity, indices, df):
             break
     return recommended_hotels
 
+@st.cache
 def test():
     global sub_replace, stop_words
     # print(1)
@@ -155,7 +158,7 @@ def test():
     print("Now Recommending")
     # return cosine_similarity
     print(recommendations('The Michelangelo Hotel',cosine_similarity, indices, df))
-
+@st.cache
 def readHotels():
     # dd = pd.read_json('review.txt')
     contents = []
@@ -191,7 +194,7 @@ def readHotels():
     data = pd.DataFrame(format_rows)
     data.columns = ['id', 'name', 'hotel_class', 'url', 'phone', 'region', 'street_address', 'postal_code', 'city']
     return data
-
+@st.cache
 def readReviews():
     # dd = pd.read_json('review.txt')
     contents = []
@@ -258,6 +261,7 @@ def readReviews():
     data.columns = ['id', 'service', 'cleanliness', 'location', 'sleep_quality', 'rooms', 'text']
     return data
 
+@st.cache
 def generateCleanDataCSV():
     hotel_df = readHotels()
     print(hotel_df.head())
