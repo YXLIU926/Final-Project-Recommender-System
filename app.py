@@ -12,7 +12,7 @@ import json
 import streamlit as st
 nltk.download('stopwords')
 import os
-os.chdir('C:\\Users\yunxinliu\Documents\GitHub\Similar-Hotel-Recommender-System')
+os.chdir('C:\Users\yunxinliu\Documents\GitHub\Similar-Hotel-Recommender-System')
 
 # GLOBAL VAIRABLES THAT WILL BE USED IN TEXT CLEAN FUNCTION & MODEL BUILD
 stop_words = ""
