@@ -6,15 +6,62 @@ from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 import re
-import random
 import cufflinks
 from plotly.offline import iplot
 import json
+import streamlit as st
+
+##############################Streamlit Appp###################################
+st.title("New York & Seattle Similar Hotel Recommender App")
+st.subheader('Overview')
+st.markdown("Author: Yunxin Liu")
+st.markdown("A hotel recommendation system that will make use of cosine similarity to output similar recommendations based on features")
+st.markdown("The dataset came from https://www.cs.cmu.edu/~jiweil/html/hotel-review.html. The author crawled 878,561 reviews from 4,333 hotels in more than 10 states through TripAdvisor")
+
+with st.sidebar.form(key="Form1"):
+    with st.sidebar:
+        feature = []
+        st.sidebar.markdown("Enter a hotel name that you enjoyed your stay in Seattle. This app will fetch 10 similar hotels in New York for you")
+        user_input=st.sidebar.text_input("")
+        feature = [str(user_input).lower()]
+        st.sidebar.text("")
+        st.sidebar.text("")
+        st.sidebar.markdown('**_Optional_**: Filter the hotels by ratings')
+        five_star = st.sidebar.checkbox('★★★★★')    
+        four_star = st.sidebar.checkbox('★★★★☆')
+        three_star = st.sidebar.checkbox('★★★☆☆')
+        two_star = st.sidebar.checkbox('★★☆☆☆')
+        one_star = st.sidebar.checkbox('★☆☆☆☆')    
+        feature_star = []
+        if (five_star):
+            feature_star.append(5)
+        if (four_star): 
+            feature_star.append(4)
+        if (three_star):
+            feature_star.append(3)
+        if (two_star):
+            feature_star.append(2)
+        if (one_star):
+            feature_star.append(1) 
+        st.sidebar.text("")
+        st.sidebar.text("")
+        st.sidebar.markdown('**_Optional_**: Preferred range of cleanliness')
+        clean=st.sidebar.slider("Cleanliness level",value=(1,1),max_value=5)
+        st.sidebar.text("")
+        st.sidebar.text("")
+        st.sidebar.markdown('**_Optional_**: Preferred range of sleep comfort level')
+        sleep=st.sidebar.slider("Sleep quality",value=(1,1),max_value=5)
+        st.sidebar.text("")
+        st.sidebar.text("")       
+        submitted1 = st.form_submit_button(label = 'Start my search!🔎')
 
 nltk.download('stopwords')
+
 # GLOBAL VAIRABLES THAT WILL BE USED IN TEXT CLEAN FUNCTIOn
 stop_words = ""
 sub_replace = None
+
+#########################################################################
 
 def dataInfo(df):
     # HOTEL DESCRIPTION TOTAL WORDS
@@ -77,7 +124,7 @@ def test():
     # print(stopwords)
     # LOAD DATA
     print("Loading Data")
-    df = pd.read_csv(r'C:\Users\elton\Desktop\Kate_Project\code\clean_data.csv')
+    df = pd.read_csv(r'C:\Users\yunxinliu\Documents\GitHub\clean_data.csv')
     # RPINT SOME DATA INFORMATION
     # dataInfo(df)
     # GET MOST COMMON WORDS FROM DESCRIPTION
@@ -112,7 +159,7 @@ def test():
 def readHotels():
     # dd = pd.read_json('review.txt')
     contents = []
-    with open(r"C:\Users\elton\Desktop\Kate_Project\code\hotels.txt") as f:
+    with open(r"C:\Users\yunxinliu\Documents\GitHub\hotels.txt") as f:
         for line in f:
             contents.append(json.loads(line))
     format_rows = []
@@ -120,8 +167,8 @@ def readHotels():
         # print(row)
         # break
         city = row["address"]["locality"]
-        # if (city != "New York City"):
-        #     continue
+        if (city != "New York City" and city != "Seattle"):
+            continue
         id = row["id"]
         name = row["name"]
         if ("hotel_class" in row):
@@ -149,7 +196,7 @@ def readReviews():
     # dd = pd.read_json('review.txt')
     contents = []
     dict = {}
-    with open(r"C:\Users\elton\Desktop\Kate_Project\code\review.txt") as f:
+    with open(r"C:\Users\yunxinliu\Documents\GitHub\review.txt") as f:
         for line in f:
             contents.append(json.loads(line))
     format_rows = []
@@ -218,9 +265,9 @@ def generateCleanDataCSV():
     print(review_df.head())
     print(len(review_df))
     final_df = pd.merge(hotel_df, review_df, on="id")
-    final_df.to_csv(r'C:\Users\elton\Desktop\Kate_Project\code\clean_data.csv', index = False)
+    final_df.to_csv(r'C:\Users\yunxinliu\Documents\GitHub\clean_data.csv', index = False)
     print(len(final_df))
 
-# generateCleanDataCSV()
-test()
+#generateCleanDataCSV()
+st.write("\nTop 10 Similar Hotels in New York:")
 
