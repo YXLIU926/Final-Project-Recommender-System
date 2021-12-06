@@ -3,3 +3,4 @@ streamlit
 plotly
 sklearn
 nltk==3.5
+cufflinks
