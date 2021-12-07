@@ -1,6 +1,5 @@
 numpy==1.18.1
 pandas==1.0.5
 streamlit
-plotly
 nltk==3.5
-cufflinks
+sklearn
