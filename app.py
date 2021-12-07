@@ -14,6 +14,7 @@ stop_words = ""
 sub_replace = None
 
 def clean_txt(text):
+    text = str(text)
     text.lower()
     text = sub_replace.sub('',text)
     ' '.join(word for word in text.split() if word not in stop_words)
