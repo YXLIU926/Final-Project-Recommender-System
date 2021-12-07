@@ -93,9 +93,9 @@ def load_model():
     sub_replace = re.compile('[^0-9a-z #+_]')
     stop_words = set(stopwords.words('english'))
     print("Loading Data")
-    path = "C:\\Users\\yunxinliu\\Documents\\GitHub"
-    my_file = path+'\\clean_data.csv'
-    df = pd.read_csv(my_file)
+    #path = "C:\\Users\\yunxinliu\\Documents\\GitHub"
+    #my_file = path+'\\clean_data.csv'
+    df = pd.read_csv("clean_data.csv")
     print(df.head())
     tempdf = df[['name', 'city']]
     for index, row in tempdf.iterrows():
