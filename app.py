@@ -10,6 +10,7 @@ import cufflinks
 from plotly.offline import iplot
 import json
 import streamlit as st
+import os
 nltk.download('stopwords')
 
 # GLOBAL VAIRABLES THAT WILL BE USED IN TEXT CLEAN FUNCTION & MODEL BUILD
@@ -92,14 +93,15 @@ def load_model():
     sub_replace = re.compile('[^0-9a-z #+_]')
     stop_words = set(stopwords.words('english'))
     print("Loading Data")
-    df = pd.read_csv('C:/Users/yunxinliu/Documents/GitHub/clean_data.csv')
+    path = "C:\\Users\\yunxinliu\\Documents\\GitHub"
+    my_file = path+'\\clean_data.csv'
+    df = pd.read_csv(my_file)
     print(df.head())
     tempdf = df[['name', 'city']]
     for index, row in tempdf.iterrows():
         if row['city'] == "Seattle":
             seattleHotels.append(row['name'])
     seattleHotels.sort()
-
     print("Calculating Word Total For Each Review")
     df['word_count']=df['text'].apply(lambda x:len(str(x).split()))
 
