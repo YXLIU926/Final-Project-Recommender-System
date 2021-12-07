@@ -6,11 +6,7 @@ from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 import re
-import cufflinks
-from plotly.offline import iplot
-import json
 import streamlit as st
-import os
 nltk.download('stopwords')
 
 # GLOBAL VAIRABLES THAT WILL BE USED IN TEXT CLEAN FUNCTION & MODEL BUILD
