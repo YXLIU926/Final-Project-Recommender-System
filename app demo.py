@@ -93,7 +93,7 @@ def load_model():
     #path = "C:\\Users\\yunxinliu\\Documents\\GitHub"
     #my_file = path+'\\clean_data.csv'
     #df = pd.read_csv("clean_data.csv")
-    df = pd.read_csv("test.csv")
+    df = pd.read_csv("clean_data_demo.csv")
     print(df.head())
     tempdf = df[['name', 'city']]
     for index, row in tempdf.iterrows():
@@ -149,8 +149,7 @@ if __name__ == '__main__':
     st.title("Seattle & New York Similar Hotel Recommender App")
     st.subheader('Overview')
     st.markdown("Author: Yunxin Liu")
-    st.markdown("A hotel recommendation system that will make use of cosine similarity to output similar recommendations in New York based on selected features from a Seattle's hotel.")
-
+    st.markdown("A hotel recommendation system that will make use of cosine similarity to output similar recommendations in New York based on selected features from a Seattle's hotel. This is a demo version and only includes five hotels from Seattle and thirty hotels from New York. For the complete version, check out the github page: https://github.com/YXLIU926/Similar-Hotel-Recommender-System")
     st.markdown("""<hr style="height:5px;border:none;color:#333;background-color:#989797;" /> """, unsafe_allow_html=True)
     st.markdown("Hit the **_Start my search_**🔎 button on the sidebar to pick your favorite hotels in New York!")
     st.text("______________________________________________________________________________________________________________________________________________________________________________________")
