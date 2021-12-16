@@ -6,3 +6,5 @@ Check out the demo streamlit app https://share.streamlit.io/yxliu926/similar-hot
 
 To accommodate Streamlit's limited resources, the demo version only includes five hotels from Seattle and thirty from New York.  
 
+Dataset credits to https://www.cs.cmu.edu/~jiweil/html/hotel-review.html
+
