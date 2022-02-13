@@ -3,7 +3,7 @@
 
 This is a hotel recommendation system that will make use of **cosine similarity** to output similar recommendations in New York based on selected features from a Seattle's hotel.
 
-To accommodate Streamlit's limited resources, the demo version only includes five hotels from Seattle and thirty from New York. If you download the dataset from the source website and deploy this app on yoru own, you will get the complete results that contain 30+ Seattle hotels and 100+ New York ones.
+To accommodate Streamlit's limited resources, the demo version only includes five hotels from Seattle and thirty from New York. If you download the dataset from the source website and deploy this app on your own, you will get the complete results that contain 30+ Seattle hotels and 100+ New York ones.
 
 Dataset credits to https://www.cs.cmu.edu/~jiweil/html/hotel-review.html
 
